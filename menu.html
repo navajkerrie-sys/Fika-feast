@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fika &amp; Feast by Ashaki | Menu</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={}</script>
+<style>
+html{scroll-behavior:smooth;background:#c9a67a}
+body{background:#c9a67a;color:#2b1a0e;font-family:Georgia,'Times New Roman',serif}
+section{scroll-margin-top:8.5rem}
+.script{font-family:'Brush Script MT','Segoe Script','Snell Roundhand',Georgia,serif;font-style:italic;font-weight:400}
+.cond{font-family:Impact,'Haettenschweiler','Arial Narrow Bold','Arial Narrow',sans-serif;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+.noscroll::-webkit-scrollbar{display:none}.noscroll{scrollbar-width:none}
+.grain{background-image:repeating-linear-gradient(0deg,rgba(90,50,20,.07) 0 1px,transparent 1px 6px)}
+</style>
+</head>
+<body>
+
+<header class="grain border-b-4 border-[#8a3b12]">
+  <div class="max-w-5xl mx-auto px-5 pt-10 pb-8">
+    <p class="cond text-xs tracking-[.35em] text-[#8a3b12]">Fun &middot; Family &middot; Friends</p>
+    <h1 class="script text-6xl sm:text-8xl leading-none mt-2">Fika &amp; Feast Menu</h1>
+    <p class="cond text-2xl sm:text-3xl mt-1">by Ashaki <span class="text-[#8a3b12] text-base align-middle ml-1">Grill &amp; BBQ</span></p>
+    <dl class="mt-7 grid sm:grid-cols-3 gap-x-8 gap-y-4 text-sm border-t border-[#2b1a0e]/20 pt-5">
+      <div><dt class="cond text-[#8a3b12] text-xs tracking-widest">Find us</dt><dd>Nakuru &middot; Plus Code P468+FP<br>Opens 10 am &middot; Dine-in, kerbside pickup, no-contact delivery</dd></div>
+      <div><dt class="cond text-[#8a3b12] text-xs tracking-widest">Call</dt><dd><a class="underline decoration-[#8a3b12]" href="tel:0796205606">0796 205 606</a></dd></div>
+      <div><dt class="cond text-[#8a3b12] text-xs tracking-widest">Payment (Cash / MPesa / Card)</dt><dd>MPESA PAYBILL: 522 533<br>A/C: 7873451</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="sticky top-0 z-30 bg-[#c9a67a]/95 backdrop-blur border-b border-[#2b1a0e]/20">
+  <div class="max-w-5xl mx-auto px-5 pt-3 flex items-center gap-3">
+    <label for="q" class="cond text-xs tracking-widest text-[#8a3b12]">Search</label>
+    <input id="q" type="search" placeholder="e.g. Tusker, mbavu, pilau" class="flex-1 bg-transparent border border-[#2b1a0e]/60 px-4 py-3 rounded-[4px] focus:outline-none focus:border-[#8a3b12] text-white placeholder:text-white/70">
+  </div>
+  <div id="links" class="noscroll max-w-5xl mx-auto flex overflow-x-auto px-3 py-2 text-xs cond tracking-wider whitespace-nowrap"></div>
+</nav>
+
+<main id="main" class="max-w-5xl mx-auto px-5 py-8 space-y-10"></main>
+<p id="none" class="hidden text-center py-16 text-xl">No items match your search.</p>
+
+<footer class="border-t-4 border-[#8a3b12] text-center text-sm px-4 py-8 text-[#2b1a0e]/80">
+  <p>We appreciate you choosing us.</p>
+  <p class="cond mt-2 text-[#8a3b12] tracking-widest">HAVE A BLESSED DAY.</p>
+</footer>
+
+<script>
+// Format: "Name|price" per line. Section note = column labels. Spelling and prices kept as printed.
+const S=[
+["FOOD","choma-zone","Choma Zone: Mbuzi Choma","",`Half Mbavu (Rib)|1000
+Half Mbavu Special|1200
+Full Mbavu (Ribs)|2000
+Full Mbavu Special|2200
+Mkono (Arm)|1800
+Mkono Special|2000
+Mguu|2200
+Mguu Special|2400
+Whole Goat|13000`],
+["FOOD","choma-chicken","Choma Zone: Chicken","",`Half Kuku Choma|1000
+Full Kuku Choma|2000`],
+["FOOD","choma-fish","Choma Zone: Fish","",`Fish Choma|2000`],
+["FOOD","brochettes","Brochettes","",`Fish Brochette|400
+Goat Brochette|300
+Liver Brochette|300
+Figo Brochette|300
+Zingaroo|400`],
+["FOOD","speciality","Speciality","",`Liver Choma|500
+Kiazi|100
+Sausage Choma (Pair)|300
+Matoke Stew|500
+Matoke Special|800`],
+["FOOD","dry-fry","Main Course: Dry Fry","",`Half Kuku|1200
+Half Mbavu|1200
+Leg|2800
+Mbavu|2400
+Mkono|2000
+Full Chicken|2400
+Fish Fry|2200
+Beef|900
+Goat|900
+Liver Dry Fry|800`],
+["FOOD","wet-fry","Main Course: Wet Fry","",`Half Kuku|1200
+Half Mbavu|1200
+Leg|2800
+Mbavu|2400
+Mkono|2000
+Full Chicken|2400
+Fish Fry|2200
+Beef|900
+Goat|900
+Liver Wet Fry|800`],
+["FOOD","kisafuria","Kisafuria","",`Mguu|3300
+Mkono|2600
+Mbavu|2800
+Kuku|3000`],
+["FOOD","boil-chemsha","Boil/Chemsha","",`Mguu Boil|2800
+Mkono Boil|2000
+Mbavu Boil|2400
+Kuku Boil|2400`],
+["FOOD","accompaniments","Accompaniments","",`Chapati|100
+Chips|250
+Chips Masala|300
+Chips Banana|250
+Kiazi|100
+Kachumbari|150
+Mashed Potatoes|250
+Mukimo|250
+Pilau|400
+Plantains|400
+Potato Wedges|250
+Roast Wedges|250
+Rice|250
+Vegetables Rice|400
+Saute Potatoes|250
+Ugali|150
+Ugali Brown|250
+Vegetables|150
+Vegetables Kienyeji|200`],
+["FOOD","bites","Bites","",`Chicken Wings|400
+Fish Fingers|400
+Omelete|150
+Fried Eggs|150
+Samosa Pair|200
+Sausage Pair|200`],
+["FOOD","soups","Soups","",`Bone Soup|400
+Butternut Soup|500
+Chicken Soup|500
+Vegetable Soup|300`],
+["FOOD","grill-mbuzi","Off The Grill: Mbuzi Choma","Plain | Special* · slow-grilled goat on an open charcoal, served with sautéed onions and peppers",`Rack of Ribs (Half)|700 | 800
+Rack of Ribs (Full)|1,400 | 1,500
+Foreshank (Mkono)|1,200 | 1,300
+Hindshank (Mguu)|1,700 | 1,900
+Whole Goat|12,000`],
+["FOOD","grill-chicken","Off The Grill: Chicken","Half | Full · moist chicken cooked bone-in on open charcoal grill",`Chicken|800 | 1,500`],
+["FOOD","grill-fish","Off The Grill: Fish","Full · whole fish cooked on open charcoal grill",`Fish|1,500`],
+["FOOD","grill-brochettes","Off The Grill: Brochettes","Meat skewers slow grilled on open charcoal grill",`Beef|300
+Fish|300
+Chicken|300
+Goat|300
+Figo (Kidney)|300
+Liver|300
+Zingaroo|300`],
+["FOOD","pan","Off The Pan","Dry | Wet",`Kuku (Half)|950 | 950
+Kuku (Full)|1,800 | 1,800
+Rack of Ribs (Half)|850 | 850
+Rack of Ribs (Full)|1,700 | 1,700
+Foreshank (Mkono)|1,500 | 1,500
+Hindshank (Mguu)|2000 | 2000
+Beef (Cubes)|600 | 600
+Liver|600 | 600
+Goat (Cubes)|600 | 600
+Fish|1,800 | 1,800`],
+["FOOD","pan-kisafuria","Off The Pan: Kisafuria","",`Kuku (Full)|2,300
+Rack of Ribs (Full)|2,100
+Foreshank (Mkono)|1,800
+Hindshank (Mguu)|2,400`],
+["FOOD","pan-chemsha","Off The Pan: Chemsha","",`Kuku (Full)|1,800
+Rack of Ribs (Full)|1,600
+Foreshank (Mkono)|1,400
+Hindshank (Mguu)|1,900`],
+["FOOD","starters","Starters &amp; Specials","",`Oxtail Soup|400
+Chicken Soup|350
+Bone Soup|300
+Butternut Soup|300
+Vegetable Soup|250
+Liver Choma|500
+Matoke Stew|500
+Matoke Special|800
+Chicken Wings|400
+Fish Fingers|400
+Fried Eggs|150
+Omelette|150
+Sausages (Pair)|200
+Choma Sausage (Pair)|300`],
+["FOOD","sides","Sides","",`Kiazi|100
+Fried Plantain|400
+French Fries|250
+Masala Chips|300
+Matoke Chips|200
+Sauté Potatoes|250
+Mashed Potatoes / Mukimo|250
+Potato Wedges|250
+Roast Potatoes|250
+Chapati|100
+Ugali|150
+Plain White Rice|250
+Pilau|350
+Seasonal Vegetables|150
+Kienyeji Vegetables|200`],
+["DRINKS","hot","Hot","",`Cappuccino|300
+Espresso|150 | 250
+Latte|250
+Mocha|300
+Dawa|300
+Lemon Tea|150
+Mixed Tea|200`],
+["DRINKS","cold","Cold","",`Juice|400
+Soda|100
+Diet Coke|150
+Novida|150
+Lime Cordial|50
+Redbull|300
+Still Water|100 | 200
+Sparkling Water|150`],
+["DRINKS","red-wine","Red Wine","",`4th Street|1,500
+Asconi|2,500
+Berry Bush|2,500
+Casillero|3,000
+Casillero|3,000
+Cellar Cask|1,500
+Drostdy Hoff|1,500
+Gato Negro|1,800
+JP|1,800
+Four Cousins|1,500
+Frontera|1,500
+Lambrusco|2,500
+Manischewitz|1,500
+Muscador|2,500
+Nederberg|2,500
+Pavillion|2,500
+Pé Tinto|2,000
+Pure Breed|2,000
+Robertsons|2,000
+Rosso Nobille|2,800
+Ville Grange|3,000`],
+["DRINKS","white-wine","White Wine","Price column was misaligned in the photo; read top to bottom after 4th Street",`4th Street|1,500
+Asconi|2,500
+Bianco Nobille|2,500
+Cellar Cask|1,500
+Drostdy Hoff|1,500
+Excelsior 2015|2,000
+Excelsior Chad|2,000
+Excelsior 2017|2,000
+Four Cousins|1,500
+Gato Negro|1,800
+Muscador|2,500
+Nederberg|2,500
+Pé Blanco|2,000
+Pure Breed|1,800
+Robertsons|2,000
+Ville Grange|1,800
+Ville Grange|1,800`],
+["DRINKS","by-glass","By Glass","",`4th Street|250
+Cellar Cask|250
+Drostdy Hoff|250`],
+["DRINKS","cask","5LT Cask","",`Drostdy Hoff|6,500`],
+["DRINKS","beer","Beer","",`Amstel|250
+Balozi|250
+Carlsberg|300
+Carlsberg Draft|250
+Castle Lite|300
+Corona|400
+Guarana|250
+Guiness Kubwa|300
+Guiness Ndogo|250
+Heineken|300
+Hunters Dry|300
+Hunters Gold|300
+Pilsner Lager|250
+Savanah|300
+Smirnoff Ice Black|250
+Smirnoff Green Apple|250
+Snapp|250
+Summit Lager|250
+Summit Malt|250
+Tuborg|250
+Tusker Lager|250
+Tusker Cider|250
+Tusker Light|250
+Tusker Premium|300
+Tusker Malt|250
+White Cap Lager|250
+White Cap Light|250`],
+["DRINKS","brandy","Brandy &amp; Cognac","Tot | Bottle",`Viceroy 10yrs|350 | 7,000
+Viceroy 5yrs|200 | 3,500
+Richot|200 | 2,500
+Courvoisier VSOP|600 | 12,000
+Courvoisier VS|500 | 10,000
+Remy Martin 1LT|500 | 10,000
+Remy Martin 700ML|500 | 8,500
+Martel VS 1LT|500 | 10,000
+Martel VS 750ML|500 | 8,500
+Martel VSOP 1LT|550 | 12,000
+Martel VSOP 750ML|550 | 10,500
+Martel VSSD|400 | 12,000
+Hennesy VS 1LT|400 | 8,000
+Hennesy VS 700ML|400 | 6,500
+Hennesy VSOP 1LT|450 | 12,000
+Hennesy VSOP 750ML|450 | 10,000
+Hennesy XO|1,500 | 30,000`],
+["DRINKS","tequila-rum","Tequila &amp; Rum","Tot | Bottle",`Bacardi|250 | 5,000
+Captain Dark|200 | 3,000
+Captain Morgan|350 | 4,000
+Captain Spice 1LT|250 | 4,500
+Captain Spice 750ML|250 | 3,500
+Malibu 1LT|200 | 4,000
+Malibu 750ML|200 | 3,500
+Myers 750ML|250 | 4,500
+Camino Silver|250 | 3,500
+Camino Gold|300 | 4,000
+José Cuervo Gold 1LT|300 | 4,500
+José Cuervo Gold 750ML|300 | 4,000
+José Cuervo Silver 1LT|250 | 4,000
+José Cuervo Silver 750ML|250 | 3,500
+Olmeca Fusion|250 | 3,500
+Tequila Rose|250 | 4,000`],
+["DRINKS","gin","Gin","Tot | Bottle",`Beefeater Clear 1LT|250 | 4,000
+Beefeater Clear 750 ML|250 | 3,000
+Beefeater Pink 1LT|250 | 5,000
+Beefeater Pink 750 ML|250 | 4,000
+Bombay Sapphire|200 | 4,000
+Gilbey's 1LT|200 | 3,500
+Gilbey's 750ML|200 | 2,500
+Gordon's 1LT|200 | 4,000
+Gordon's 750ML|200 | 3,500
+Hendriks|300 | 9,000
+Tanqueray 1LT|250 | 6,000
+Tanqueray 750ML|250 | 5,000
+Tanqueray 10|300 | 7,000
+The Botanist|250 | 6,000`],
+["DRINKS","vodka","Vodka","Tot | Bottle",`Absolut 1LT|250 | 5,000
+Absolut 750ML|250 | 4,000
+Absolute Mango 750ML|250 | 4,500
+Smirnoff Red 1LT|200 | 3,500
+Smirnoff Red 750ML|200 | 3,000
+Smirnoff Red 375ML|200 | 1,500
+Ciroc 750ML (Red Berry · Coconut · Pineapple · Blue)|300 | 6,500`],
+["DRINKS","liqueurs","Liqueurs","Tot | Bottle",`Amarula 1LT|300 | 5,000
+Amarula 750ML|300 | 4,500
+Baileys 1LT|300 | 5,500
+Baileys 750ML|300 | 4,500
+Baileys 375ML|300 | 2,000
+Butlers|200 | 9,000
+Cointreau|250 | 7,000
+Fernet Branca|250 | 5,000
+Frangelico|250 | 4,000
+Jagermeister 1LT|250 | 6,000
+Jagermeister 700ML|250 | 4,500
+Kahlua|300 | 6,000
+Southern Comfort|250 | 4,500
+Southern Comfort 1LT|250 | 5,500
+Sheridan|300 | 7,000
+Tripple Sec|250 | 3,000`],
+["DRINKS","champagne","Champagne","",`Don Perignon|25,000
+G.H. Mumms|15,000
+Henkel Troken|13,000
+Moet &amp; Chandon|10,000
+Muscador|1,800`],
+["DRINKS","cigarettes","Cigarettes","",`Dunhill Light|300
+Dunhill Switch|300
+Dunhill Double Switch|350
+Embassy Light|300
+Embassy Kings|300`],
+["DRINKS","single-malt","Single Malt Whisky","Tot | Bottle",`Auchentoshan 750 ML|500 | 10,000
+Caolila 750 ML|400 | 8,000
+Clynelish 750ML|600 | 12,000
+Glenfiddich 12 Yrs 1L|400 | 8,500
+Glenfiddich 12 Yrs 750ML|400 | 7,500
+Glenfiddich 15 Yrs 1L|450 | 10,500
+Glenfiddich 15 Yrs 750ML|450 | 9,500
+Glenfiddich 18 Yrs 1LT|600 | 12,000
+Glenfiddich 18 Yrs 750ML|600 | 11,000
+Glenkinchie 750ML|500 | 10,000
+Glenlivet 12Yrs 1LT|450 | 9,500
+Glenlivet 12Yrs 750 ML|450 | 8,500
+Glenlivet 15Yrs 1LT|500 | 13,500
+Glenlivet 15Yrs 750ML|500 | 11,500
+Glenlivet 18Yrs 1LT|650 | 15,000
+Glenlivet 18Yrs 750ML|650 | 13,000
+Glenlivet 1824 750ML|400 | 7,500
+Glenmorangie 12Yrs 750 ML|550 | 10,000
+Lagavulin 750ML|450 | 8,000
+Glenmorangie Original 750ML|700 | 12,000
+Singleton Tailfire 750ML|350 | 7,000
+Singleton 12Yrs 750ML|350 | 6,000
+Singleton 15Yrs 750ML|450 | 8,500
+Singleton 18Yrs 750ML|500 | 10,000
+Talisker 10Yrs 750ML|450 | 8,000
+Talisker Storm 750ML|450 | 8,000`],
+["DRINKS","premium-blended","Premium Blended Whisky","Tot | Bottle",`Chivas 18Years 1LT|500 | 11,500
+Chivas 18Years 750ML|500 | 10,500
+Jameson Black Barrel 1LT|500 | 8,000
+Johnnie Walker Gold 1LT|450 | 10,000
+Johnnie Walker Gold 750ML|450 | 9,000
+Johnnie Walker Double Black 1LT|550 | 8,500
+Johnnie Walker 18Years 1LT|650 | 13,500`],
+["DRINKS","blended-whisky","Blended Whisky","Tot | Bottle",`Ballantines 1LT|250 | 5,500
+Bulleit Bourbon 750 ML|250 | 5,000
+Chivas 12Years 1LT|350 | 7,000
+Chivas 12Years 750ML|350 | 5,500
+Famous Grouse 1LT|250 | 4,000
+Famous Grouse 750 ML|250 | 3,500
+Grants 1LT|250 | 4,000
+Grants 750 ML|250 | 3,000
+Jack Daniels 1LT|350 | 6,000
+Jack Daniels 750 ML|350 | 5,000
+Jack Daniels 375 ML|350 | 3,000
+Jack Daniels Honey 1LT|350 | 6,500
+Jack Daniels Honey 750 ML|350 | 5,500
+Jack Daniels Fire 1LT|350 | 6,500
+Jack Daniels Fire 750 ML|350 | 5,500
+Jameson 1LT|250 | 4,500
+Jameson 750 ML|250 | 3,500
+Jameson 375ML|250 | 2,500
+J&amp;B 1LT|250 | 4,000
+J&amp;B 750 ML|250 | 3,500
+Johnnie Walker Black 1LT|350 | 6,000
+Johnnie Walker Black 750 ML|350 | 5,000
+Johnnie Walker Black 375ML|350 | 3,000
+Johnnie Walker Red 1LT|250 | 4,000
+Johnnie Walker Red 750 ML|250 | 3,000
+Monkey Shoulder 750 ML|300 | 6,000
+Vat 69 1LT|250 | 4,000
+Vat 69 750 ML|250 | 3,000
+William Lawsons 1LT|250 | 4,000
+William Lawsons 750 ML|250 | 3,000`],
+["OLD","old-beer","Beer","",`Balozi|300.00
+Corona|400.00
+Desperados|350.00
+G.K Smooth|300.00
+Guarana|300.00
+Guiness Kubwa|350.00
+Guiness Small|300.00
+Heineiken|350.00
+Hope House|350.00
+Hunters Dry|300.00
+Hunters Gold|300.00
+Pilsner Lager|300.00
+Savannah|350.00
+Sikera|300.00
+Smirnoff Apple|250.00
+Smirnoff Ice Black|250.00
+Smirnoff Pineapple|300.00
+Snapp|250.00
+Summit Lager|300.00
+Summit Malt|250.00
+Tuborg|400.00
+Tusker Cider|300.00
+Tusker Lager|300.00
+Tusker Lite|300.00
+Tusker Malt|300.00
+Tusker Prem.|300.00
+White Cap Lager|300.00
+White Cap Light|350.00
+Windhoek|300.00`],
+["OLD","old-brandy","Brandy &amp; Cognac","",`Ritchot 750ML|2,500.00
+Viceroy 10yrs|7,000.00
+Viceroy 5yr|3,500.00
+Faxe|300.00
+Courvoisier VS|8,000.00
+Courvoisier VSOP|12,000.00
+Henessy VS 700ML|9,000.00
+Henessy VSOP 750ML|15,000.00
+Hennesy VS 1LTR|12,000.00
+Henessy VSOP 1LTR|18,000.00
+Martel Blue Swift|12,500.00
+Martel VS 1LTR|11,000.00
+Martel VS 700ML|9,000.00
+Martel VSOP 1LTR|15,000.00
+Martel VSOP 700ML|11,500.00
+Remy Martin 1L|16,500.00`],
+["OLD","old-rum","Rum (Tequila &amp; Rum page, header cropped)","",`Barcadi|5,000.00
+Captain Morgan Jam.|4,000.00
+Captain Spice 1L|4,500.00
+Captain Spice 750ML|3,500.00
+Khalua 1LTR|6,000.00
+Malibu 1LTR|5,000.00
+Malibu 750ML|4,000.00`],
+["OLD","old-gin","Gin","",`Beefeater Pink|4,500.00
+Bombay 1L|5,500.00
+Bombay Saphire|4,000.00
+Gilbeys 375ML|1,200.00
+Gilbeys 750ML|2,500.00
+Gordon 1LTR|4,500.00
+Gordon 750ML|4,000.00
+Hendricks|10,000.00
+Tanqueray|5,000.00
+Tanqueray 10 1LTR|8,000.00
+Tanqueray 10 750ML|7,000.00
+Tanqueray 1LTR|6,000.00`],
+["OLD","old-liqueurs","Liqueurs","",`Amarula 1L|6,000.00
+Amarula 750ML|5,000.00
+Baileys 750ML|5,000.00
+Baileys Cream 1LT|6,000.00
+Baileys Delight|4,000.00
+Buttlers|3,500.00
+Campari|4,000.00
+Grand Marnier 750|4,500.00
+Southern Com. 1LTR|6,000.00
+Southern Comfort 750ML|5,000.00
+Tripple Sec|3,000.00
+Barcadi|5,000.00
+Captain Morgan Jam.|4,000.00
+Captain Spice 1L|4,500.00
+Captain Spice 750ML|3,500.00
+Khalua 1LTR|6,000.00
+Malibu 1LTR|5,000.00
+Malibu 750ML|4,000.00`],
+["OLD","old-vodka","Vodka (prices cut off in photo)","",`Absolute 1LTR|
+Absolute Ma.|
+Absolute Vanilla 750ML|
+Absolute Vodka 750ML|
+Ciroc 1LTR|
+Ciroc Coconut 750ML|
+Ciroc Pinn|
+Ciroc Red B.|
+Smirnoff 750ML|
+Smirnoff 1LITRE|`],
+["OLD","old-blended","Blended Whisky (small print, verify)","",`Auchentoshan|13,500.00
+Balentines|5,000.00
+Balentines 1LTR|6,000.00
+Bulleit|6,500.00
+Cardhu|11,500.00
+Chivas 18yrs 750ML|10,500.00
+Chivas Regal 1LR|8,000.00
+Chivas Regal 750ML|6,500.00
+Famouse 750ML|6,500.00
+Famouse Smoking|5,000.00
+Gentleman Jack|8,000.00
+Grants|3,500.00
+J. Walker Blue|40,000.00
+J.Daniels|5,500.00
+J.Daniels 700ML|5,500.00
+J.Daniels Fire 1LTR|6,500.00
+J.Walker 18|18,500.00
+J.Walker Gold 1 LTR|13,000.00
+J.Walker Green 750|10,500.00
+J/W Black 1LTR|6,500.00
+J/W Black 375ML|3,000.00
+J/W Black 750ML|5,500.00
+J/W D.Black 1L|9,500.00
+J/W Gold Label|11,000.00
+J/W Red 1LTR|4,500.00
+J/W Red 750ML|3,500.00
+Jack Daniels Honey 1 LTR|6,500.00
+Jack Daniels Honey 750ML|5,500.00
+Jagermeister 700ML|5,000.00
+Jagermister 1LTR|6,000.00
+Jameson 1LTR|5,000.00
+Jameson 750ML|4,000.00
+Jameson B.Barrel|8,000.00
+Jim Beam Red|4,500.00
+Lagavulin 750|14,000.00
+Macallan|12,000.00
+Monkey 750ML|9,500.00
+Olmeca|5,000.00
+Vat 69|3,000.00
+W.Lawson 1LTR|4,500.00
+W.Lawson 750ML|3,000.00`],
+["OLD","old-grill-left","Off The Grill (left page, left edge cropped)","",`1/2 Chicken Choma|900.00
+1/2 Mbavu Choma|900.00
+Brochette Beef|300.00
+Brochette Figo|250.00
+Brochette Fish|300.00
+Brochette Goat|300.00
+Brochette Liver|250.00
+Zingaro|300.00
+Chicken Brochette|300.00
+Chiken Kienyeji Choma|1,800.00
+Choma Sausage|150.00
+Fish Choma|1,800.00
+Half Mbavu Special|1,000.00
+Kuku Special|1,900.00
+Mguu Choma|2,000.00
+Liver Choma|500.00
+Mbavu Special|1,900.00`],
+["OLD","old-grill-right","Off The Grill (right page)","",`1/2 Chicken Dry Fry|950.00
+1/2 Kienyeji Chicken Wetfry|950.00
+1/2 Kuku Kisufuria|1,100.00
+1/2 Mbavu Fry|1,000.00
+1/2 Mbavu Kisafuria|1,100.00
+Akabenzi Dry Fry|1,000.00
+Dry Fried Goat|800.00
+Fish Fry|2,000.00
+Kuku Boil|2,000.00
+Kuku Dry Fry|1,800.00
+Kuku Kisufuria|2,400.00
+Kuku Nusu Boil|1,000.00
+Kuku Wet Fry|2,000.00
+Leg Fry|2,200.00
+Liver Fry|800.00
+Matoke Special|800.00
+Matoke Stew|500.00
+Matumbo Fry|600.00
+Mbavu Boil|2,000.00
+Mbavu Fry|2,000.00
+Mbavu Half Boil|1,000.00
+Mbavu Kisufuria|2,200.00
+Mbuzi Funtion|13,000.00
+Mguu Boil|2,200.00
+Mguu Kisufuria|2,400.00
+Mkono Boil|1,800.00
+Mkono Fry|1,800.00
+Mkono Kisufuria|2,000.00
+Wet Fried Goat|800.00`],
+["OLD","old-starters-left","Starters &amp; Specials: Sides","",`Avocado Salad|200.00
+Avocado Serve|150.00
+Brown Rice|350.00
+Chapati|100.00
+Chips|250.00
+Chips Banana|200.00
+Chips Masala|300.00
+Chips Mayai|250.00
+Cream Veg|300.00
+Garden Salad|300.00
+Kachumbari|150.00
+Kachumbari Special|200.00
+Kiazi|100.00
+Managu|200.00
+Mashed Potato|250.00
+Mukimo|250.00
+Pilau|350.00
+Plantains|400.00
+Potato Wedges|250.00
+Rice|250.00
+Roast Potato|250.00
+Salad|300.00
+Saute Potato|250.00
+Ugali|150.00
+Ugali Brown|250.00
+Veg Mix|300.00
+Veg Rice|300.00
+Vegetables|150.00`],
+["OLD","old-starters-right","Starters &amp; Specials","",`3 X Samosas|200.00
+Chicken Wings|400.00
+Fish Fingers|400.00
+Omelette|150.00
+Omellette Special|300.00
+Sausage X 2|200.00
+Spring Rolls|100.00
+Bone Soup|300.00
+Butternut Soup|300.00
+Chicken Soup|350.00
+Gravy Sauce|100.00
+Hot Sauce|300.00
+Oxtail Soup|400.00
+Pepe Soup|700.00
+Soup Plain|100.00
+Vegetable Soup|250.00`]
+];
+const groups={FOOD:"Food",DRINKS:"Drinks &amp; Bar",OLD:"Older Menu"};
+const gnote={OLD:"Photographed from an earlier printed menu. Prices differ from the current menu above."};
+const main=document.getElementById('main'),links=document.getElementById('links');
+let last='';
+S.forEach(([g,id,title,note,body])=>{
+  if(g!==last){last=g;
+    const h=document.createElement('div');h.className='grp pt-8';h.dataset.g=g;h.id='g-'+g;
+    h.innerHTML=`<h2 class="script text-5xl sm:text-6xl text-[#8a3b12]">${groups[g]}</h2>${gnote[g]?`<p class="text-sm italic text-[#2b1a0e]/70">${gnote[g]}</p>`:''}`;
+    main.appendChild(h);
+    const a=document.createElement('a');a.href='#g-'+g;a.className='shrink-0 px-3 py-2 text-[#8a3b12] font-bold';a.innerHTML=groups[g];links.appendChild(a);}
+  const sec=document.createElement('section');sec.id=id;sec.dataset.g=g;
+  const rows=body.split('\n').map(l=>{const i=l.lastIndexOf('|');const n=l.slice(0,i).trim();const p=l.slice(i+1).trim();
+    return `<li class="item flex items-baseline gap-2 py-[7px] break-inside-avoid"><span>${n}</span><span class="flex-1 border-b border-dotted border-[#2b1a0e]/30"></span><span class="price whitespace-nowrap text-right tabular-nums">${p}</span></li>`}).join('');
+  sec.innerHTML=`<h3 class="cond inline-block bg-[#8a3b12] text-[#f6ead2] text-xl px-4 py-1">${title}</h3>${note?`<p class="text-xs italic text-[#2b1a0e]/70 mt-2">${note}</p>`:''}<ul class="mt-3 sm:columns-2 sm:gap-12 border-t border-[#2b1a0e]/20">${rows}</ul>`;
+  main.appendChild(sec);
+  const a=document.createElement('a');a.href='#'+id;a.className='shrink-0 px-3 py-2 text-[#2b1a0e]/70 hover:text-[#8a3b12]';a.innerHTML=title;links.appendChild(a);
+});
+document.getElementById('q').addEventListener('input',e=>{
+  const v=e.target.value.trim().toLowerCase();let any=false;
+  document.querySelectorAll('section').forEach(s=>{
+    const t=s.querySelector('h3').textContent.toLowerCase();let n=0;
+    s.querySelectorAll('.item').forEach(li=>{const m=!v||li.textContent.toLowerCase().includes(v)||t.includes(v);li.style.display=m?'':'none';if(m)n++});
+    s.style.display=n?'':'none';if(n)any=true;});
+  document.querySelectorAll('.grp').forEach(h=>{const vis=[...document.querySelectorAll('section')].some(s=>s.dataset.g===h.dataset.g&&s.style.display!=='none');h.style.display=vis?'':'none'});
+  document.getElementById('none').classList.toggle('hidden',any);
+});
+</script>
+</body>
+</html>

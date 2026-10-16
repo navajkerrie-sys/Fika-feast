@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Gallery | Indoors, Outdoors &amp; Food</title>
+<meta name="description" content="A sliding photo gallery of indoor spaces, outdoor spots and food.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6ecd0;--ink:#2b190c;--mute:#6e4d33;--ochre:#cc8844;--cream:#f6ffd2;--card:#2b190c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150d07;--ink:#f6ecd0;--mute:#c4a780}}
+:root[data-theme="dark"]{--bg:#150d07;--ink:#f6ecd0;--mute:#c4a780}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,sans-serif;overflow-x:hidden}
+h1,h2{margin:0;font:400 clamp(2.8rem,9vw,7rem)/.95 "Instrument Serif",Georgia,serif;letter-spacing:-.025em}
+h2{font-size:clamp(2.2rem,6vw,4.2rem)}
+a{color:inherit}
+.w{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3.5rem)}
+.bar{position:absolute;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:5;padding:1.2rem 0;color:#f6ecd0}
+.bar .w{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.bar b{font:400 1.5rem "Instrument Serif",Georgia,serif}
+.bar nav{display:flex;gap:1.4rem;font-weight:500;font-size:.9rem}
+.bar nav a{text-decoration:none}
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#f6ecd0;padding:7rem 0 4rem;overflow:hidden;background:radial-gradient(circle at 80% 30%,#b0642a99,transparent 40%),radial-gradient(circle at 15% 90%,#e0a94a44,transparent 35%),linear-gradient(135deg,#3a2210,#1a0f07 70%)}
+.hero:after{content:"";position:absolute;inset:0;opacity:.16;pointer-events:none;background:repeating-radial-gradient(circle at 25% 35%,#fff 0 .6px,transparent .6px 3px)}
+.hero .w{position:relative;z-index:1}
+.hero p{max-width:420px;margin:1.4rem 0 2.4rem;font-size:1.05rem}
+.pill{display:inline-block;background:#f6ffd2;color:#111;border-radius:99px;padding:.85rem 2rem;font-weight:700;font-size:.92rem;text-decoration:none}
+.sec{padding:clamp(3rem,7vw,5.5rem) 0 1rem}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.head p{margin:0;color:var(--mute);max-width:320px}
+.num{font:italic 400 1.1rem "Instrument Serif",serif;color:var(--ochre)}
+.rail{overflow:hidden;padding:.6rem 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;gap:1.1rem;width:max-content;animation:none;transform:none;display:flex;flex-wrap:wrap;gap:1rem;}
+.rail{overflow-x:auto;} .track,.rail:focus-within .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(calc(-50% - .55rem))}}
+.tile{position:relative;flex:none;height:clamp(220px,32vw,340px);aspect-ratio:var(--r,4/5);border:0;padding:0;border-radius:6px;overflow:hidden;cursor:pointer;color:#fff8e6;background:var(--g);box-shadow:0 8px 24px #0004;transition:transform .3s}
+.tile:hover{transform:translateY(-6px)}
+.tile:before{content:"";position:absolute;inset:0;opacity:.2;background:repeating-radial-gradient(circle at 60% 40%,#000 0 .7px,transparent .7px 3px)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .art{position:absolute;inset:0;background:var(--a)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:2.2rem .9rem .8rem;text-align:left;font-weight:500;font-size:.88rem;background:linear-gradient(transparent,#000a)}
+.tile .cap i{display:block;font:italic 400 .8rem "Instrument Serif",serif;opacity:.8}
+.band{height:6px;margin:3rem 0 0;background:repeating-linear-gradient(90deg,var(--ochre) 0 14px,transparent 14px 28px);opacity:.5}
+.eyebrow { display : none; }
+footer{padding:3rem 0 5rem;text-align:center;color:var(--mute);font-size:.9rem}
+dialog{border:0;padding:0;background:#150d07;color:#f6ecd0;border-radius:8px;max-width:min(92vw,720px);width:100%}
+dialog::backdrop{background:#000c}
+dialog .v{aspect-ratio:4/3;background:var(--g);position:relative}
+dialog .v img{width:100%;height:100%;object-fit:cover}
+dialog .c{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;gap:1rem}
+dialog button{background:#f6ffd2;border:0;border-radius:99px;padding:.5rem 1.2rem;font:700 .85rem Figtree,sans-serif;cursor:pointer}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.track{animation:none}.rail{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.tile{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="w"><b>The Gallery</b><nav aria-label="Sections"><a href="#indoor">Indoor</a><a href="#outdoor">Outdoor</a><a href="#food">Food</a></nav></div></div>
+
+<header class="hero"><div class="w">
+<h1>Outdoors,<br>gardens<br>&amp; plates.</h1>
+<p>A slow slide through the spaces we love, inside and out, and the food worth stopping for.</p>
+<a class="pill" href="#indoor">Start browsing</a>
+</div></header>
+
+<main id="main"></main>
+
+<dialog id="lb" aria-label="Photo preview"><div class="v" id="lbv"></div><div class="c"><span id="lbc"></span><button type="button" id="lbx">Close</button></div></dialog>
+
+<footer><div class="w"><div class="band"></div><p style="margin-top:2rem"></p></div></footer>
+
+<script>
+/* Add your own photos: set src to an image path/URL (works when hosted on your own site). Empty src shows the brown placeholder art. */
+var G=[
+{id:"indoor",title:"Indoor",blurb:"Warm light, wood and quiet corners.",speed:44,items:[
+["","5/4","public/indoor1.jpg","5/4"],["","4/5","public/indoor2.jpg","4/5"],["","1/1","public/indoor3.jpg","1/1"],["","5/4","public/indoor4.jpg","5/4"],["","3/4","public/indoor5.jpg","3/4"],["","1/1","public/indoor6.jpg","1/1"],["","5/4","public/indoor7.jpg","5/4"]]},
+{id:"outdoor",title:"Outdoor",blurb:"Fresh air, open sky and good company.",speed:52,items:[
+["","5/4","public/outdoor1.jpg","5/4"],["","4/5","public/outdoor2.jpg","4/5"],["","1/1","public/outdoor3.jpg","1/1"],["","5/4","public/outdoor4.jpg","5/4"],["","3/4","public/outdoor5.jpg","3/4"],["","1/1","public/outdoor6.jpg","1/1"],["","5/4","public/outdoor7.jpg","5/4"]]},
+{id:"food",title:"Food",blurb:"Plates made to be shared.",speed:34,items:[
+["","1/1","public/food1.jpg","1/1"],["","4/5","public/food2.jpg","4/5"],["","5/4","public/food3.jpg","5/4"],["","1/1","public/food4.jpg","1/1"],["","3/4","public/food5.jpg","3/4"],["","5/4","public/food6.jpg","5/4"]]}
+];
+var PAL=[["#c98a45","#6b3412"],["#8c4a1d","#e0a94a"],["#a8582a","#2b190c"],["#d9a45a","#7a3f18"],["#6e3b1a","#cc8844"],["#b8743a","#3a2210"],["#e0b472","#8a4a1e"],["#9a5a2a","#f0c47a"]];
+var main=document.getElementById("main"),lb=document.getElementById("lb"),lbv=document.getElementById("lbv"),lbc=document.getElementById("lbc");
+function art(i,k){var p=PAL[(i+k*3)%PAL.length],a=(i*37+k*23)%360;
+return "radial-gradient(circle at "+(20+i*9%60)+"% "+(25+i*13%50)+"%,#fff3 0,transparent 35%),linear-gradient("+a+"deg,"+p[0]+","+p[1]+")"}
+function tile(it,i,k,dup,sec){
+var b=document.createElement("button");b.type="button";b.className="tile";
+b.style.setProperty("--r",it[1]);b.style.setProperty("--g",art(i,k));
+var cap=it[0],src=it[2]||"";
+b.innerHTML=(src?'<img src="'+src+'" alt="'+cap+'" loading="lazy">':"");
+b.setAttribute("aria-label",sec+" photo "+(i+1)+": "+cap);
+if(dup){b.tabIndex=-1;b.setAttribute("aria-hidden","true")}
+b.onclick=function(){lbv.style.setProperty("--g",art(i,k));lbv.innerHTML=src?'<img src="'+src+'" alt="'+cap+'">':"";lbc.textContent=sec+" · "+cap;lb.showModal()};
+return b}
+G.forEach(function(s,k){
+var sec=document.createElement("section");sec.className="sec";sec.id=s.id;
+sec.innerHTML='<div class="w"><div class="w"><div class="head"><div><h2>'+s.title+'</h2><p>'+s.blurb+'</p></div><span class="num">'+String(s.items.length).padStart(2,"0")+'</span></div></div></div>';
+var rail=document.createElement("div");rail.className="rail";
+var tr=document.createElement("div");tr.className="track";tr.style.setProperty("--d",s.speed+"s");
+[0].forEach(function(d){s.items.forEach(function(it,i){tr.appendChild(tile(it,i,k,d,s.title))})});
+rail.appendChild(tr);sec.appendChild(rail);main.appendChild(sec)});
+document.getElementById("lbx").onclick=function(){lb.close()};
+lb.addEventListener("click",function(e){if(e.target===lb)lb.close()});
+</script>
+</body>
+</html>
