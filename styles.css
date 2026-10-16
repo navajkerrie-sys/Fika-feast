@@ -55,6 +55,13 @@ footer a{color:var(--cream)}
 .legal h2{font:700 1.2rem Figtree,sans-serif;letter-spacing:0;margin:2rem 0 .4rem}
 .legal .n{border-left:4px solid var(--ochre);padding:.8rem 1rem;background:#cc884422}
 .legal a{color:inherit}
+.info{background:var(--cream);color:var(--ink)}
+.igrid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.ic{border:1px solid #1d120833;border-radius:10px;padding:1.2rem 1.3rem;background:#ffffffaa}
+.ic.acc{background:var(--ochre);border-color:transparent}
+.ic h3{margin-bottom:.8rem}
+.ic ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+.ic li{border:1px solid #1d120866;border-radius:99px;padding:.22rem .8rem;font-size:.85rem;line-height:1.4}
 .tb{overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:480px}td,th{border:1px solid #8886;padding:.5rem;text-align:left;font-size:.9rem}
 #cc{position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--cream);color:var(--ink);border-top:3px solid #000;padding:1rem clamp(1.25rem,5vw,3.5rem) calc(1rem + env(safe-area-inset-bottom,0px));display:none}
